@@ -1,0 +1,11 @@
+[project]
+name = "olist-analytics"
+version = "0.1.0"
+description = "Pipeline ELT com Dataset OLIST"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "kagglehub>=1.0.2",
+    "loguru>=0.7.3",
+    "pandas>=3.0.5",
+]

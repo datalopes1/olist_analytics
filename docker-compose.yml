@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  airflow:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+    container_name: airflow_elt
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      AIRFLOW_HOME: /airflow
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql://${POSTGRES_USER}:${POSTGRES_PASS}@postgres:5432/${POSTGRES_DB}
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: 'True'
+      _AIRFLOW_WWW_USER_USERNAME: admin
+      _AIRFLOW_WWW_USER_PASSWORD: admin
+    ports: 
+      - "8080:8080"
+    volumes:
+      - ./airflow/dags:/airflow/dags
+      - ./airflow/logs:/airflow/logs
+      - ./src:/src
+      - ./dbt:/dbt
+    command: airflow standalone
+
+volumes:
+  postgres_data:
