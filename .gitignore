@@ -2,3 +2,4 @@
 .dlt
 .env
 data/raw/*.jsonl
+dbt/logs

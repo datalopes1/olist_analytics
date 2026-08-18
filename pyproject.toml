@@ -5,6 +5,9 @@ description = "Pipeline ELT com Dataset OLIST"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "dbt-core>=1.12.2",
+    "dbt-postgres>=1.11.0",
+    "dlt[postgres]>=1.30.0",
     "kagglehub>=1.0.2",
     "loguru>=0.7.3",
     "pandas>=3.0.5",

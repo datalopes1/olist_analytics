@@ -1,0 +1,22 @@
+name: 'olist_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'default'
+
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+# Configurations
+models:
+  olist_analytics:
+    staging:
+      materialized: view
+      schema: stg
+    int:
+      materialized: ephemeral        
+    marts:
+      materialized: table
+      schema: analytics
