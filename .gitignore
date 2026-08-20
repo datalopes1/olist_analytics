@@ -3,3 +3,5 @@
 .env
 data/raw/*.jsonl
 dbt/logs
+__pycache__
+.ruff_cache
