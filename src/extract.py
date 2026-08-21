@@ -28,7 +28,9 @@ def get_kaggle_data(kaggle_path: str, datasets: list) -> None:
                 index=False,
             )
             logger.info(
-                "Dataset {} extraído. {} linhas carregadas.", dataset, len(temp_df)
+                "Dataset {} extraído. {} linhas carregadas.",
+                dataset,
+                len(temp_df),
             )
         elapsed = perf_counter() - start
         logger.success(
