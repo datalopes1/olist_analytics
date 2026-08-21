@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: db
+    schema: raw
+    tables:
+      - name: customers
+        descriptions: "Dados de clientes registrados."
+      - name: geolocation
+        description: "Dados de geolocalização de clientes e vendedores."
+      - name: order_items
+        description: "Dados de pedidos com detalhamento no itens."
+      - name: order_payments
+        description: "Dados dos pagamentos dos pedidos realizados."
+      - name: order_reviews
+        descriptions: "Dados de avaliação dos pedidos realizados."
+      - name: orders
+        description: "Dados dos pedidos e entrega."
+      - name: products
+        description: "Dados de produtos registrados."
+      - name: sellers
+        description: "Dados de vendedores registrados."

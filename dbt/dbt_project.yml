@@ -12,11 +12,11 @@ macro-paths: ["macros"]
 # Configurations
 models:
   olist_analytics:
-    staging:
-      materialized: view
-      schema: stg
+    stg:
+      +materialized: view
+      +schema: stg
     int:
-      materialized: ephemeral        
+      +materialized: ephemeral        
     marts:
-      materialized: table
-      schema: analytics
+      +materialized: table
+      +schema: marts
