@@ -1,7 +1,7 @@
 [project]
 name = "olist-analytics"
 version = "0.1.0"
-description = "Pipeline ELT com Dataset OLIST"
+description = "Pipeline ELT com Brazilian E-Commerce Public Dataset by Olist"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,4 +11,23 @@ dependencies = [
     "kagglehub>=1.0.2",
     "loguru>=0.7.3",
     "pandas>=3.0.5",
+]
+
+[tool.sqlfluff.core]
+dialect = "postgres"
+templater = "jinja"
+max_line_length = 80
+
+[tool.ruff]
+line-length = 80
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "B",
+    "UP",
+    "SIM",
 ]

@@ -27,7 +27,9 @@ def order_items():
 
 
 @dlt.resource(
-    table_name="order_payments", write_disposition="merge", primary_key="order_id"
+    table_name="order_payments",
+    write_disposition="merge",
+    primary_key="order_id",
 )
 def order_payments():
     file_path = "./data/raw/olist_order_payments_dataset.jsonl"
@@ -35,7 +37,9 @@ def order_payments():
 
 
 @dlt.resource(
-    table_name="order_reviews", write_disposition="merge", primary_key="review_id"
+    table_name="order_reviews",
+    write_disposition="merge",
+    primary_key="review_id",
 )
 def order_reviews():
     file_path = "./data/raw/olist_order_reviews_dataset.jsonl"
