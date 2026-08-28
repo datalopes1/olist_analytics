@@ -16,10 +16,10 @@ dependencies = [
 [tool.sqlfluff.core]
 dialect = "postgres"
 templater = "jinja"
-max_line_length = 80
+max_line_length = 88
 
 [tool.ruff]
-line-length = 80
+line-length = 88
 target-version = "py312"
 
 [tool.ruff.lint]
