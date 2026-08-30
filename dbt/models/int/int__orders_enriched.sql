@@ -1,5 +1,5 @@
 with source as (
-    select * from dev_stg.stg__orders
+    select * from {{ref('stg__orders')}}
 ),
 
 lead_time_calculations as (
@@ -19,6 +19,7 @@ lead_time_calculations as (
                 then 1
             else 0
         end as is_late,
+        case when order_status = 'DELIVERED' then 1 else 0 end as is_delivered,
         case
             when
                 order_delivered_customer_dt > order_estimated_delivery_dt
@@ -64,3 +65,4 @@ lead_time_calculations as (
 )
 
 select * from lead_time_calculations
+ 
