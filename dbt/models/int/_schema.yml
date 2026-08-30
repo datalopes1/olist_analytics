@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: int__orders_enriched
+    columns:
+      name: order_id
+      data_tests:
+        - not null
+        - unique
