@@ -7,3 +7,4 @@ __pycache__
 .ruff_cache
 dbt/target
 .vscode
+dbt_packages

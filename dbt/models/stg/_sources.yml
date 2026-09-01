@@ -3,20 +3,28 @@ version: 2
 sources:
   - name: db
     schema: raw
+    description: "Banco de dados relacional bruto (raw) contendo as tabelas operacionais do sistema de e-commerce."
     tables:
       - name: customers
-        descriptions: "Dados de clientes registrados."
+        description: "Dados brutos de cadastro dos clientes, incluindo identificadores transacionais e código postal de localização."
+
       - name: geolocation
-        description: "Dados de geolocalização de clientes e vendedores."
+        description: "Tabela operacional com o mapeamento de prefixos de CEP para coordenadas geográficas (latitude e longitude)."
+
       - name: order_items
-        description: "Dados de pedidos com detalhamento no itens."
+        description: "Detalhamento dos itens contidos em cada pedido, incluindo chave do produto, vendedor, preços e datas de envio."
+
       - name: order_payments
-        description: "Dados dos pagamentos dos pedidos realizados."
+        description: "Registros dos métodos de pagamento utilizados pelos clientes, parcelamento e valores cobrados por transação."
+
       - name: order_reviews
-        descriptions: "Dados de avaliação dos pedidos realizados."
+        description: "Registros de avaliações, notas e comentários enviados pelos clientes após a conclusão ou entrega do pedido."
+
       - name: orders
-        description: "Dados dos pedidos e entrega."
+        description: "Tabela principal de pedidos contendo o status da compra e os timestamps de cada etapa do ciclo de vida da entrega."
+
       - name: products
-        description: "Dados de produtos registrados."
+        description: "Catálogo de produtos cadastrados com suas respectivas categorias, dimensões e especificações físicas."
+
       - name: sellers
-        description: "Dados de vendedores registrados."
+        description: "Dados brutos de cadastro dos vendedores (merchants) parceiros da plataforma e sua localização."

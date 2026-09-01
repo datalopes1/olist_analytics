@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Tabela fato de pedidos com métricas de entrega."
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: fct_order_payments
+    description: "Tabela fato com dados de pagamentos"
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+
+  - name: fct_order_review
+    description: "Tabela fato com dados de avaliações."
+    columns:
+      - name: review_id
+        data_tests:
+          - not_null
+          - unique
+      
+      - name: order_id
+        data_tests:
+          - not_null
+
+  - name: fct_orders_items
+    description: "Tabela fato com itens do pedido detalhados e métricas financeiras."
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+      
+      - name: order_item
+        data_tests:
+          - not_null

@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Dimensão de clientes com dados geográficos."
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_unique_id
+        data_tests:
+          - not_null
+
+  - name: dim_products
+    description: "Dimensão de produtos com categoria."
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_sellers
+    description: "Dimensão de vendedores com dados geográficos."
+    columns:
+      - name: seller_id
+        data_tests:
+          - not_null
+          - unique

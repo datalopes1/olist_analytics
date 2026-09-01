@@ -2,15 +2,19 @@ version: 2
 
 models:
   - name: stg__customers
+    description: "Camada de staging com os dados de cadastro e localização dos clientes."
     columns:
       - name: customer_id
+        description: "Chave primária do cliente na transação (única por pedido)."
         data_tests:
           - not_null
           - unique
 
   - name: stg__geolocations
+    description: "Camada de staging com o mapeamento de códigos postais para coordenadas de latitude e longitude."
     columns:
       - name: zip_code_prefix
+        description: "Primeiros 5 dígitos do CEP."
         data_tests:
           - not_null:
               config:
@@ -20,45 +24,58 @@ models:
                 severity: warn
 
   - name: stg__order_items
+    description: "Camada de staging contendo a relação de itens e produtos inclusos em cada pedido."
     columns:
       - name: order_id
+        description: "Identificador do pedido (chave estrangeira para stg__orders)."
         data_tests:
           - not_null
 
       - name: order_item
+        description: "Número sequencial que identifica a ordem do item dentro do mesmo pedido."
         data_tests:
           - not_null
 
   - name: stg__order_payments
+    description: "Camada de staging com os detalhes das opções de pagamento utilizadas nos pedidos."
     columns:
       - name: order_id
+        description: "Identificador do pedido (chave estrangeira para stg__orders)."
         data_tests:
           - not_null
 
   - name: stg__order_reviews
+    description: "Camada de staging com as avaliações e feedbacks deixados pelos clientes sobre os pedidos."
     columns:
       - name: review_id
+        description: "Identificador único da avaliação emitida."
         data_tests:
           - unique
           - not_null
 
   - name: stg__orders
+    description: "Camada de staging central com o status, ciclo de vida e timestamps dos pedidos."
     columns:
       - name: order_id
+        description: "Chave primária do pedido."
         data_tests:
           - unique
           - not_null
 
   - name: stg__products
+    description: "Camada de staging com as características físicas e categorias dos produtos cadastrados."
     columns:
       - name: product_id
+        description: "Chave primária do produto."
         data_tests:
           - unique
           - not_null
 
   - name: stg__sellers
+    description: "Camada de staging com as informações de cadastro e localização dos vendedores."
     columns:
       - name: seller_id
+        description: "Chave primária do vendedor."
         data_tests:
           - unique
           - not_null
