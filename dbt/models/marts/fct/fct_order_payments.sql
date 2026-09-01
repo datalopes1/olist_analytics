@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ref('stg__order_payments')}}
+    select * from {{ ref('stg__order_payments') }}
 ),
 
 final as (

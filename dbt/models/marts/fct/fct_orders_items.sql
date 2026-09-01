@@ -1,9 +1,9 @@
 with order_items as (
-    select * from {{ref('stg__order_items')}}
+    select * from {{ ref('stg__order_items') }}
 ),
 
 orders as (
-    select * from {{ref('stg__orders')}}
+    select * from {{ ref('stg__orders') }}
 ),
 
 final as (

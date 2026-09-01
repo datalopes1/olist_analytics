@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ref('stg__products')}}
+    select * from {{ ref('stg__products') }}
 ),
 
 final as (
