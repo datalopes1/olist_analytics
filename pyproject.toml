@@ -1,0 +1,37 @@
+[project]
+name = "olist-platform"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "astronomer-cosmos>=1.15.1",
+    "dbt-core>=1.7.20",
+    "dbt-mysql>=1.7.0",
+    "dlt[sqlalchemy]>=1.30.0",
+    "kagglehub>=1.0.2",
+    "loguru>=0.7.3",
+    "pandas>=3.0.5",
+    "pymysql>=1.2.0",
+    "ruff>=0.16.6",
+    "sqlfluff>=4.3.0",
+]
+
+[tool.sqlfluff.core]
+dialect = "mysql"
+templater = "jinja"
+max_line_length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "B",
+    "UP",
+    "SIM",
+]
