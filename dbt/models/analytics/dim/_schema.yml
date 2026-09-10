@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Dimensão com cada cliente único."
+
+    columns:
+      - name: customer_unique_id
+        tests:
+          - not_null
+          - unique
+      
+  - name: dim_geolocations
+    description: "Dimensão com dados de geolocalização"
+
+    columns:
+      - name: zip_code_prefix
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_products
+    description: "Dimensão com os produtos e suas categorias."
+
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_sellers
+    description: "Dimensão com cada vendedor único."
+
+    columns:
+      - name: seller_id
+        tests:
+          - not_null
+          - unique
