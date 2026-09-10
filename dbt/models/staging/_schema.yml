@@ -11,3 +11,88 @@ models:
       - name: customer_unique_id
         tests:
           - not_null
+
+  - name: stg_geolocation
+    description: "Dados normalizados e padronizados de avaliações.padronizados de geolocalização"
+
+    columns:
+      - name: zip_code_prefix
+        tests:
+          - not_null
+
+  - name: stg_order_items
+    description: "Dados normalizados dos detalhes de pedidos."
+
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+      - name: order_item_id
+        tests:
+          - not_null
+  
+  - name: stg_order_payments
+    description: "Dados normalizados de pagamentos."
+
+    columns:
+      - name: order_id
+        tests: 
+          - not_null
+      - name: payment_type
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                - "BOLETO"
+                - "CREDIT CARD"
+                - "DEBIT CARD"
+                - "NOT DEFINED"
+                - "VOUCHER"
+    
+  - name: stg_order_reviews
+    description: "Dados normalizados e padronizados de avaliações."
+
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+      - name: review_id
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: "Dados normalizados e padronizados de entregas."
+
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+      - name: order_status
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - "SHIPPED"
+                  - "UNAVAILABLE"
+                  - "CREATED"
+                  - "DELIVERED"
+                  - "INVOICED"
+                  - "CANCELED"
+                  - "PROCESSING"
+                  - "APPROVED"
+
+  - name: stg_products
+    description: "Dados normalizados e padronizados de produtos."
+
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+
+  - name: stg_sellers
+    description: "Dados normalizados e padronizados de vendedores."
+    
+    columns:
+      - name: seller_id
+        tests:
+          - not_null
