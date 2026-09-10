@@ -21,3 +21,10 @@ olist_*.csv
 .vscode
 logs/
 target/
+dbt_packages/
+target/
+logs/
+manifest.json
+run_results.json
+catalog.json
+semantic_manifest.json

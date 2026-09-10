@@ -16,9 +16,9 @@ dependencies = [
 ]
 
 [tool.sqlfluff.core]
-dialect = "mysql"
+dialect = "postgres"
 templater = "jinja"
-max_line_length = 88
+max_line_length = 120
 
 [tool.ruff]
 line-length = 88
