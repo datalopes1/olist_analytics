@@ -13,6 +13,7 @@ ranked as (
 
 final as (
     select
+        {{ dbt_utils.generate_surrogate_key(['zip_code_prefix']) }} as geolocation_sk,
         zip_code_prefix,
         uf,
         cidade

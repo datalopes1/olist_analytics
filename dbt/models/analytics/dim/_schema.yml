@@ -5,7 +5,7 @@ models:
     description: "Dimensão com cada cliente único."
 
     columns:
-      - name: customer_unique_id
+      - name: customer_sk
         tests:
           - not_null
           - unique
@@ -14,7 +14,7 @@ models:
     description: "Dimensão com dados de geolocalização"
 
     columns:
-      - name: zip_code_prefix
+      - name: geolocation_sk
         tests:
           - not_null
           - unique
@@ -23,7 +23,7 @@ models:
     description: "Dimensão com os produtos e suas categorias."
 
     columns:
-      - name: product_id
+      - name: product_sk
         tests:
           - not_null
           - unique
@@ -32,7 +32,7 @@ models:
     description: "Dimensão com cada vendedor único."
 
     columns:
-      - name: seller_id
+      - name: seller_sk
         tests:
           - not_null
           - unique

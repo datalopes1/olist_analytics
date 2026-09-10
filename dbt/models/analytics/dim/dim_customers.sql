@@ -3,11 +3,12 @@ with customers as (
 ),
 
 orders as (
-    select * from stg_orders
+    select * from {{ ref ('stg_orders') }}
 ),
 
 clean as (
     select
+        {{ dbt_utils.generate_surrogate_key(['customer_unique_id']) }} as customer_sk,
         c.customer_unique_id,
         c.customer_zip_code_prefix,
         c.uf,
@@ -19,6 +20,7 @@ clean as (
 
 final as (
     select
+        customer_sk,
         customer_unique_id,
         customer_zip_code_prefix,
         uf,
