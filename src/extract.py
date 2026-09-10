@@ -5,7 +5,7 @@ import kagglehub
 import pandas as pd
 from loguru import logger
 
-RAW_PATH = Path("./include/data/")
+RAW_PATH = Path("./data/")
 TABLES = [
     "olist_customers_dataset",
     "olist_geolocation_dataset",

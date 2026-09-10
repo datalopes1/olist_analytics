@@ -3,7 +3,7 @@ from pathlib import Path
 import dlt
 from dlt.sources.filesystem import filesystem, read_csv
 
-RAW_DATA_PATH = Path("./include/data/")
+RAW_DATA_PATH = Path("./data/")
 
 
 @dlt.resource(table_name="customers", write_disposition="replace")
@@ -63,7 +63,7 @@ def olist_raw():
 def load():
     pipeline = dlt.pipeline(
         pipeline_name="olist_raw",
-        destination="sqlalchemy",
+        destination="postgres",
         dataset_name="raw",
     )
 

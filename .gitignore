@@ -19,3 +19,5 @@ airflow.db
 .dlt
 olist_*.csv
 .vscode
+logs/
+target/
