@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_order_metrics
+    description: "Métricas derivadas de pedidos."
+
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+
+      - name: is_delivered
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+      - name: is_delayed
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
