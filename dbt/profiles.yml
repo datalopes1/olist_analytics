@@ -10,4 +10,4 @@ olist:
       password: "{{ env_var('POSTGRES_PASSWORD') }}"
       dbname: "{{ env_var('POSTGRES_DB') }}"
       schema: dbt
-      threads: 4
+      threads: 1

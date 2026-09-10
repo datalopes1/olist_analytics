@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Tabela fato com pedidos e dados de entrega."
+
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_sk
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_sk
+    
+  - name: fct_order_items
+    description: "Tabela fato com os detalhes do pedido."
+
+    columns:
+      - name: order_sk
+        tests:
+          - unique
+          - not_null
+      
+      - name: customer_sk
+        tests: 
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_sk
+      
+      - name: product_sk
+        tests: 
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_sk
+      
+      - name: seller_sk
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_sellers')
+                field: seller_sk
+
+  - name: fct_order_payments
+    description: "Tabela fato com dados de pagamento."
+
+    columns:
+      - name: payment_sk
+        tests:
+          - unique
+          - not_null
+  
+  - name: fct_order_reviews
+    description: "Tabela fato com as notas de avaliação."
+
+    columns:
+      - name: review_sk
+        tests:
+          - unique
+          - not_null
