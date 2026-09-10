@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: raw
+    database: warehouse
+    schema: raw
+    description: "Dados brutos do e-commerce Olist armazenados no schema raw."
+    tables:
+      - name: customers
+        description: "Tabela contendo os dados de clientes e sua localização."
+      - name: geolocation
+        description: "Tabela contendo as localizações e dados geográficos."
+      - name: order_items
+        description: "Tabela contendo dados detalhes de itens nos pedidos."
+      - name: order_payments
+        description: "Tabela contendo dados de pagamentos."
+      - name: order_reviews
+        description: "Tabela contendo dados de avaliações dos pedidos."
+      - name: orders
+        description: "Tabela contendo dados sobre a entrega dos pedidos."
+      - name: products
+        description: "Tabela contendo dados e detalhes sobre os produtos."
+      - name: sellers
+        description: "Tabela contendo os dados de vendedores e sua localização."
