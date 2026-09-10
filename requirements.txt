@@ -1,7 +1,9 @@
-astronomer-cosmos>=1.15.1
 dbt-core>=1.7.20
+dbt-postgres>=1.11.0
+dlt[postgres]>=1.30.0
 kagglehub>=1.0.2
 loguru>=0.7.3
 pandas>=3.0.5
 ruff>=0.16.6
 sqlfluff>=4.3.0
+astronomer-cosmos

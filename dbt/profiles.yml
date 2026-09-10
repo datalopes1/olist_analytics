@@ -11,3 +11,13 @@ olist:
       dbname: "{{ env_var('POSTGRES_DB') }}"
       schema: dbt
       threads: 1
+
+    prod:
+      type: postgres
+      host: host.docker.internal
+      port: 5433
+      user: "{{ env_var('POSTGRES_USER') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      dbname: "{{ env_var('POSTGRES_DB') }}"
+      schema: dbt
+      threads: 1
