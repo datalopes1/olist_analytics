@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:16
+    shm_size: '1gb'
     container_name: olist_dwh
     restart: unless-stopped
     environment:
