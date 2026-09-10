@@ -11,40 +11,48 @@ def customers():
     file_path = RAW_DATA_PATH / "olist_customers_dataset.csv"
     yield from filesystem(bucket_url=str(file_path), file_glob="") | read_csv
 
+
 @dlt.resource(table_name="geolocation", write_disposition="replace")
 def geolocation():
     file_path = RAW_DATA_PATH / "olist_geolocation_dataset.csv"
     yield from filesystem(bucket_url=str(file_path), file_glob="") | read_csv
+
 
 @dlt.resource(table_name="order_items", write_disposition="replace")
 def order_items():
     file_path = RAW_DATA_PATH / "olist_order_items_dataset.csv"
     yield from filesystem(bucket_url=str(file_path), file_glob="") | read_csv
 
+
 @dlt.resource(table_name="order_payments", write_disposition="replace")
 def order_payments():
     file_path = RAW_DATA_PATH / "olist_order_payments_dataset.csv"
     yield from filesystem(bucket_url=str(file_path), file_glob="") | read_csv
+
 
 @dlt.resource(table_name="order_reviews", write_disposition="replace")
 def order_reviews():
     file_path = RAW_DATA_PATH / "olist_order_reviews_dataset.csv"
     yield from filesystem(bucket_url=str(file_path), file_glob="") | read_csv
 
+
 @dlt.resource(table_name="orders", write_disposition="replace")
 def orders():
     file_path = RAW_DATA_PATH / "olist_orders_dataset.csv"
     yield from filesystem(bucket_url=str(file_path), file_glob="") | read_csv
+
 
 @dlt.resource(table_name="products", write_disposition="replace")
 def products():
     file_path = RAW_DATA_PATH / "olist_products_dataset.csv"
     yield from filesystem(bucket_url=str(file_path), file_glob="") | read_csv
 
+
 @dlt.resource(table_name="sellers", write_disposition="replace")
 def sellers():
     file_path = RAW_DATA_PATH / "olist_sellers_dataset.csv"
     yield from filesystem(bucket_url=str(file_path), file_glob="") | read_csv
+
 
 @dlt.source
 def olist_raw():
@@ -56,7 +64,7 @@ def olist_raw():
         order_reviews(),
         orders(),
         products(),
-        sellers()
+        sellers(),
     ]
 
 

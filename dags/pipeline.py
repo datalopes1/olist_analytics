@@ -1,10 +1,11 @@
 from datetime import datetime, timedelta
-from loguru import logger
-from pathlib import Path
+
 from airflow.decorators import dag, task
-from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig
-from src.extract import extract as extract_main  
-from src.load import load as load_main            
+from cosmos import DbtTaskGroup, ProfileConfig, ProjectConfig
+from loguru import logger
+
+from src.extract import extract as extract_main
+from src.load import load as load_main
 
 
 @dag(
@@ -25,23 +26,21 @@ def olist_pipeline():
     @task()
     def extract():
         logger.info("Iniciando extração de dados...")
-        extract_main() 
+        extract_main()
         logger.info("Extração concluída")
 
     @task()
     def load():
         logger.info("Iniciando carregamento de dados...")
-        load_main() 
+        load_main()
         logger.info("Carregamento concluído")
 
     dbt = DbtTaskGroup(
         group_id="dbt",
-        project_config=ProjectConfig(
-            dbt_project_path="/usr/local/airflow/dbt"  
-        ),
+        project_config=ProjectConfig(dbt_project_path="/usr/local/airflow/dbt"),
         profile_config=ProfileConfig(
             profile_name="olist",
-            target_name="prod", 
+            target_name="prod",
             profiles_yml_filepath="/usr/local/airflow/dbt/profiles.yml",
         ),
     )
