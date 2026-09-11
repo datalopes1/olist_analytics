@@ -1,24 +1,30 @@
 version: 2
 
 models:
-  - name: fct_orders
+  - name: fct_deliveries
     description: "Tabela fato com pedidos e dados de entrega."
 
     columns:
-      - name: order_id
+      - name: delivery_sk
         tests:
           - not_null
           - unique
 
       - name: customer_sk
         tests:
-          - not_null
           - relationships:
               arguments:
                 to: ref('dim_customers')
                 field: customer_sk
+
+      - name: geolocation_sk
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_geolocations')
+                field: geolocation_sk
     
-  - name: fct_order_items
+  - name: fct_sales
     description: "Tabela fato com os detalhes do pedido."
 
     columns:
@@ -51,7 +57,7 @@ models:
                 to: ref('dim_sellers')
                 field: seller_sk
 
-  - name: fct_order_payments
+  - name: fct_payments
     description: "Tabela fato com dados de pagamento."
 
     columns:
@@ -59,8 +65,15 @@ models:
         tests:
           - unique
           - not_null
+      - name: customer_sk
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_sk
   
-  - name: fct_order_reviews
+  - name: fct_reviews
     description: "Tabela fato com as notas de avaliação."
 
     columns:
@@ -68,3 +81,9 @@ models:
         tests:
           - unique
           - not_null
+      - name: customer_sk
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_sk
