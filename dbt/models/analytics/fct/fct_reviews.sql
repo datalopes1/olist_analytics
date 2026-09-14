@@ -26,7 +26,7 @@ final as (
 select
     re.review_id,
     re.order_id,
-    {{ dbt_utils.generate_surrogate_key(['re.order_id', 're.review_id']) }} as payment_sk,
+    {{ dbt_utils.generate_surrogate_key(['re.order_id', 're.review_id']) }} as review_sk,
     dc.customer_sk,
     re.review_dt,
     re.review_score

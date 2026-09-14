@@ -76,3 +76,19 @@ models:
               arguments:
                 to: ref('dim_customers')
                 field: customer_sk
+
+  - name: fct_reviews
+    description: "Tabela fato com dados de avaliações."
+
+    columns:
+      - name: review_sk
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_sk
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_sk
