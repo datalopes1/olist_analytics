@@ -14,8 +14,8 @@ clean as (
         c.uf,
         c.cidade,
         row_number() over (partition by c.customer_unique_id order by o.approved_at desc nulls last) as rn
-    from customers as c
-    left join orders as o on c.customer_id = o.customer_id
+    from customers c
+    left join orders o on c.customer_id = o.customer_id
 ),
 
 final as (

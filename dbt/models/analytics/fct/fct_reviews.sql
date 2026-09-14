@@ -2,18 +2,36 @@ with reviews as (
     select * from {{ ref('stg_order_reviews') }}
 ),
 
-final as (
+orders as (
+    select * from {{ ref('stg_orders') }}
+),
+
+customers as (
+    select * from {{ ref('stg_customers') }}
+),
+
+review as (
 select 
-    r.review_id,
-    r.order_id,
-    {{ dbt_utils.generate_surrogate_key(['r.review_id', 'r.order_id']) }} as review_sk,
+    re.review_id,
+    re.order_id,
+    cs.customer_unique_id,
+    re.review_dt,
+    re.review_score
+from reviews re
+left join orders od on re.order_id = od.order_id
+left join customers cs on od.customer_id = cs.customer_id
+),
+
+final as (
+select
+    re.review_id,
+    re.order_id,
+    {{ dbt_utils.generate_surrogate_key(['re.order_id', 're.review_id']) }} as payment_sk,
     dc.customer_sk,
-    r.review_dt,
-    r.review_score
-from reviews r
-left join {{ ref('stg_orders') }} o on r.order_id = o.order_id
-left join {{ ref('stg_customers') }} c on o.customer_id = c.customer_id
-left join {{ ref('dim_customers') }} dc on c.customer_unique_id = dc.customer_unique_id
+    re.review_dt,
+    re.review_score
+from review re
+left join {{ ref('dim_customers') }} dc on re.customer_unique_id = dc.customer_unique_id
 )
 
-select * from final
+select * from final 

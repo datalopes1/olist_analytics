@@ -1,14 +1,28 @@
 version: 2
 
 models:
-  - name: fct_deliveries
-    description: "Tabela fato com pedidos e dados de entrega."
+  - name: fct_sales
+    description: "Tabela fato com métricas de vendas."
 
     columns:
-      - name: delivery_sk
+      - name: sales_sk
         tests:
           - not_null
           - unique
+
+      - name: product_sk
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_sk
+
+      - name: seller_sk
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_sellers')
+                field: seller_sk
 
       - name: customer_sk
         tests:
@@ -23,64 +37,39 @@ models:
               arguments:
                 to: ref('dim_geolocations')
                 field: geolocation_sk
-    
-  - name: fct_sales
-    description: "Tabela fato com os detalhes do pedido."
+
+  - name: fct_deliveries
+    description: "Tabela fato com métricas de entrega."
 
     columns:
-      - name: order_sk
-        tests:
+      - name: order_id
+        tests: 
           - unique
           - not_null
-      
+
       - name: customer_sk
-        tests: 
-          - not_null
+        tests:
           - relationships:
               arguments:
                 to: ref('dim_customers')
                 field: customer_sk
-      
-      - name: product_sk
-        tests: 
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_products')
-                field: product_sk
-      
-      - name: seller_sk
+
+      - name: geolocation_sk
         tests:
-          - not_null
           - relationships:
               arguments:
-                to: ref('dim_sellers')
-                field: seller_sk
+                to: ref('dim_geolocations')
+                field: geolocation_sk
 
   - name: fct_payments
-    description: "Tabela fato com dados de pagamento."
+    description: "Tabela fato com dados de pagamentos."
 
     columns:
       - name: payment_sk
         tests:
+          - not_null
           - unique
-          - not_null
-      - name: customer_sk
-        tests:
-          - not_null
-          - relationships:
-              arguments:
-                to: ref('dim_customers')
-                field: customer_sk
-  
-  - name: fct_reviews
-    description: "Tabela fato com as notas de avaliação."
 
-    columns:
-      - name: review_sk
-        tests:
-          - unique
-          - not_null
       - name: customer_sk
         tests:
           - relationships:

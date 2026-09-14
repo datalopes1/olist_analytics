@@ -1,27 +1,41 @@
 with payments as (
-    select * from {{ ref ('stg_order_payments') }}
+    select * from {{ ref('stg_order_payments') }}
 ),
 
 customers as (
-    select 
-        o.order_id,
-        d.customer_sk 
-    from {{ ref('stg_orders') }} o 
-    left join {{ ref('stg_customers') }} c on o.customer_id = c.customer_id 
-    left join {{ ref('dim_customers') }} d on c.customer_unique_id = d.customer_unique_id
+    select * from {{ ref('stg_customers') }}
+),
+
+orders as (
+    select * from {{ ref('stg_orders') }}
+),
+
+payment as (
+select 
+    pa.order_id,
+    cs.customer_unique_id,
+    pa.payment_sequential,
+    pa.payment_installments,
+    pa.payment_type,
+    date_trunc('day', od.approved_at) as approved_at,
+    pa.payment_value
+from payments pa
+left join orders od on pa.order_id = od.order_id
+left join customers cs on od.customer_id = cs.customer_id
 ),
 
 final as (
-select 
-    {{ dbt_utils.generate_surrogate_key(['p.order_id', 'p.payment_sequential']) }} as payment_sk,
-    c.customer_sk,
-    p.order_id,
-    p.payment_type,
-    p.payment_sequential,
-    p.payment_installments,
-    p.payment_value
-from payments p
-left join customers c on p.order_id = c.order_id
+select
+    pa.order_id,
+    {{ dbt_utils.generate_surrogate_key(['pa.order_id', 'pa.payment_sequential']) }} as payment_sk,
+    dc.customer_sk,
+    pa.payment_sequential,
+    pa.payment_installments,
+    pa.payment_type,
+    pa.approved_at,
+    pa.payment_value
+from payment pa
+left join {{ ref('dim_customers') }} dc on pa.customer_unique_id = dc.customer_unique_id
 )
 
 select * from final
