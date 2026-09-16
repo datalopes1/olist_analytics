@@ -1,0 +1,101 @@
+table fctSales
+	lineageTag: 8a99ed2d-3dc6-4f5e-b30e-82d19740c62f
+
+	column order_id
+		dataType: string
+		lineageTag: 9c4049b5-d307-45cc-a39d-97ffb1c79e82
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_item_id
+		dataType: int64
+		formatString: 0
+		lineageTag: bf53e297-bad7-49cd-8f33-48d47b130806
+		summarizeBy: sum
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales_sk
+		dataType: string
+		lineageTag: b8f990a7-9353-4f05-9f60-bc707151f058
+		summarizeBy: none
+		sourceColumn: sales_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_sk
+		dataType: string
+		lineageTag: 6a5b49b4-af5e-4dc9-afbf-a345b6e57c8a
+		summarizeBy: none
+		sourceColumn: product_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_sk
+		dataType: string
+		lineageTag: 4dd06453-8ca9-4034-a991-1a7cf2120b0e
+		summarizeBy: none
+		sourceColumn: seller_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_sk
+		dataType: string
+		lineageTag: 9a7e33bd-b25d-481d-81d6-e7063c65fcf2
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column geolocation_sk
+		dataType: string
+		lineageTag: c14dded3-e52f-466a-8054-6227950dccc0
+		summarizeBy: none
+		sourceColumn: geolocation_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_dt
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8f71d66b-dfab-4d52-b5c5-503ed5e71863
+		summarizeBy: none
+		sourceColumn: purchase_dt
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: double
+		lineageTag: 82a7a1b9-6f40-40d7-baa5-b52c9fba7ec8
+		summarizeBy: sum
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column freight_value
+		dataType: double
+		lineageTag: c30f4c13-a6bf-4033-b141-ecaeb2ab1b74
+		summarizeBy: sum
+		sourceColumn: freight_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fctSales = m
+		mode: import
+		source =
+				let
+				  Source = PostgreSQL.Database("localhost:5433", "warehouse", [Query = "select * from analytics.fct_sales"])
+				in
+				  Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

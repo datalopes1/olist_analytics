@@ -1,0 +1,121 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "Fluent2-CY26SU08",
+      "reportVersionAtImport": {
+        "visual": "2.12.0",
+        "report": "3.4.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "Custom2710121028162652.json",
+      "reportVersionAtImport": {
+        "visual": "2.12.0",
+        "report": "3.4.0",
+        "page": "2.3.1"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Middle'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "Fluent2-CY26SU08",
+          "path": "BaseThemes/Fluent2-CY26SU08.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "1080x1920_-_Alt628371341780049.png",
+          "path": "1080x1920_-_Alt628371341780049.png",
+          "type": "Image"
+        },
+        {
+          "name": "cross-circle_(1)043531426282191754.png",
+          "path": "cross-circle_(1)043531426282191754.png",
+          "type": "Image"
+        },
+        {
+          "name": "cross-circle_(1)07694589094159365.png",
+          "path": "cross-circle_(1)07694589094159365.png",
+          "type": "Image"
+        },
+        {
+          "name": "cross-circle9851354421976835.png",
+          "path": "cross-circle9851354421976835.png",
+          "type": "Image"
+        },
+        {
+          "name": "Custom2710121028162652.json",
+          "path": "Custom2710121028162652.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "filter_(1)7593614305255811.png",
+          "path": "filter_(1)7593614305255811.png",
+          "type": "Image"
+        },
+        {
+          "name": "filter_(1)8443613942384367.png",
+          "path": "filter_(1)8443613942384367.png",
+          "type": "Image"
+        },
+        {
+          "name": "filter9885403049999688.png",
+          "path": "filter9885403049999688.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultFilterActionIsDataFilter": true,
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true,
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
+  }
+}

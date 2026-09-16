@@ -1,0 +1,39 @@
+table dimProducts
+	lineageTag: 883b7a0c-572d-46d0-8587-20442ecb672b
+
+	column product_sk
+		dataType: string
+		lineageTag: 246c07a2-2020-4719-8ec3-de84aec8d6f6
+		summarizeBy: none
+		sourceColumn: product_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 701309c4-f308-4238-bc64-d2aaa9d01b71
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_category
+		dataType: string
+		lineageTag: 018b2004-c354-4f4e-9f11-1e856ecd09c6
+		summarizeBy: none
+		sourceColumn: product_category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimProducts = m
+		mode: import
+		source =
+				let
+				  Source = Value.NativeQuery(PostgreSQL.Database("localhost:5433", "warehouse"), "select * from analytics.dim_products", null, [EnableFolding=true])
+				in
+				  Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

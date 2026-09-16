@@ -1,0 +1,179 @@
+table ' Medidas'
+	lineageTag: ff1aabb6-6375-49e2-b340-7bd423fe96bc
+
+	measure 'Receita Total' =
+			
+			SUM('fctSales'[price])
+		formatString: "R$"#,0.00;-"R$"#,0.00;"R$"#,0.00
+		displayFolder: Base
+		lineageTag: d3bc1ef4-1fca-4e0e-b10c-79385716eac0
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-BR"}
+
+	measure 'Custo Frete' =
+			
+			SUM('fctSales'[freight_value])
+		formatString: "R$"#,0.00;-"R$"#,0.00;"R$"#,0.00
+		displayFolder: Base
+		lineageTag: 61799be6-f4bf-4390-8cb4-e4d3443ec957
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-BR"}
+
+	measure 'Qtde Itens Pedidos' =
+			
+			COUNTROWS('fctSales')
+		formatString: #,0
+		displayFolder: Base
+		lineageTag: 63f690aa-ae10-4725-8ddb-22ec9ba09951
+
+	measure 'Ticket Medio' =
+			
+			DIVIDE([Receita Total], [Qtde Itens Pedidos], BLANK())
+		formatString: "R$"#,0.00;-"R$"#,0.00;"R$"#,0.00
+		displayFolder: KPI
+		lineageTag: ca105e11-87f3-4b64-9d64-34e10511384d
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-BR"}
+
+	measure 'Custo Frete Medio' =
+			
+			AVERAGE('fctSales'[freight_value])
+		formatString: "R$"#,0.00;-"R$"#,0.00;"R$"#,0.00
+		displayFolder: KPI
+		lineageTag: bced486a-9e8c-4ba9-9c1d-b982772de640
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-BR"}
+
+	measure 'Receita Total MM 365D' = ```
+			
+			VAR _Period = 
+			CALCULATETABLE(
+			    DATESINPERIOD(
+			        'dimCalendar'[Date],
+			        MAX('fctSales'[purchase_dt]),
+			        -1,
+			        YEAR
+			    )
+			)
+			RETURN
+			AVERAGEX(
+			    _Period,
+			    [Receita Total]
+			)
+			```
+		formatString: "R$"#,0.00;-"R$"#,0.00;"R$"#,0.00
+		displayFolder: Time Intelligence
+		lineageTag: f98f9aea-a72f-4fb2-8a45-cd9db3e52b9a
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-BR"}
+
+	measure 'Dashboard Subtitle' =
+			
+			"Atualizado em – " & MAX('auxRefresh'[DataAtualizacao])
+		displayFolder: Format
+		lineageTag: 47efb60f-a7c7-49f0-aada-ac3a9a638b96
+
+	measure 'Ticket Medio MoM %' = ```
+			
+			VAR _Current = [Ticket Medio]
+			VAR _Previous = CALCULATE([Ticket Medio], DATEADD('dimCalendar'[Date], -1, MONTH))
+			VAR _MoM = _Current - _Previous
+			VAR _Result = 
+			IF(
+			    NOT ISBLANK(_Previous) && NOT ISBLANK(_Current),
+			    DIVIDE(_MoM, _Previous, BLANK())
+			)
+			RETURN ROUND(_Result, 4)
+			```
+		displayFolder: Time Intelligence
+		lineageTag: ff08efbd-cbd1-4f8f-ab6e-ddf59bfb17ef
+
+		formatStringDefinition = ```
+				"▲ #,##0.00%;▼ #,##0.00%;■ #,##0.00%" 
+				```
+
+	measure 'Custo Frete Medio MoM %' =
+			
+			VAR _Current = [Custo Frete Medio]
+			VAR _Previous = CALCULATE([Custo Frete Medio], DATEADD('dimCalendar'[Date], -1, MONTH))
+			VAR _MoM = _Current - _Previous
+			RETURN
+			IF(
+			    NOT ISBLANK(_Previous) && NOT ISBLANK(_Current),
+			    DIVIDE(_MoM, _Previous, BLANK())
+			)
+		displayFolder: Time Intelligence
+		lineageTag: ae2e1e74-1029-418c-a3c6-2291c0a11664
+
+		formatStringDefinition = ```
+				"▲ #,##0.00%;▼ #,##0.00%;■ #,##0.00%" 
+				```
+
+	measure 'Receita Total MoM %' =
+			
+			VAR _Current = [Receita Total]
+			VAR _Previous = CALCULATE([Receita Total], DATEADD('dimCalendar'[Date], -1, MONTH))
+			VAR _MoM = _Current - _Previous
+			VAR _Result =
+			IF(
+			    NOT ISBLANK(_Previous) && NOT ISBLANK(_Current),
+			    DIVIDE(_MoM, _Previous, BLANK())
+			)
+			RETURN ROUND(_Result, 4)
+		displayFolder: Time Intelligence
+		lineageTag: dd16f7db-6174-42e8-9532-dd364017b12a
+
+		formatStringDefinition = ```
+				"▲ #,##0.00%;▼ #,##0.00%;■ #,##0.00%" 
+				```
+
+	measure 'Qtde Itens Pedidos MoM %' =
+			
+			VAR _Current = [Qtde Itens Pedidos]
+			VAR _Previous = CALCULATE([Qtde Itens Pedidos], DATEADD('dimCalendar'[Date], -1, MONTH))
+			VAR _MoM = _Current - _Previous
+			RETURN
+			IF(
+			    NOT ISBLANK(_Previous) && NOT ISBLANK(_Current),
+			    DIVIDE(_MoM, _Previous, BLANK())
+			)
+		displayFolder: Time Intelligence
+		lineageTag: 8032a6c4-58d2-4ac4-af4a-88e22363ae13
+
+		formatStringDefinition = ```
+				"▲ #,##0.00%;▼ #,##0.00%;■ #,##0.00%" 
+				```
+
+	measure 'Custo Frete MoM %' =
+			
+			VAR _Current = [Custo Frete]
+			VAR _Previous = CALCULATE([Custo Frete], DATEADD('dimCalendar'[Date], -1, MONTH))
+			VAR _MoM = _Current - _Previous
+			RETURN
+			IF(
+			    NOT ISBLANK(_Previous) && NOT ISBLANK(_Current),
+			    DIVIDE(_MoM, _Previous, BLANK())
+			)
+		displayFolder: Time Intelligence
+		lineageTag: 2606321e-70cf-43b7-ac22-57e15b326f4f
+
+		formatStringDefinition = ```
+				"▲ #,##0.00%;▼ #,##0.00%;■ #,##0.00%" 
+				```
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: bd0800d5-522b-495b-89e4-7054fefc22fe
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ' Medidas' = calculated
+		mode: import
+		source = {BLANK()}
+
+	annotation PBI_Id = 39efa8a3f4b6405fa502d1adbfa49706
+

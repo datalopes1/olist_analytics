@@ -1,0 +1,34 @@
+table auxRefresh
+	lineageTag: c055952c-d3ec-456b-a216-f5140228fd66
+
+	column DataAtualizacao
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f5f6fad3-82a4-493d-aeff-35db843c14e3
+		summarizeBy: none
+		sourceColumn: DataAtualizacao
+
+		annotation SummarizationSetBy = Automatic
+
+	partition auxRefresh = m
+		mode: import
+		source =
+				let
+				    // 1. Pega a data/hora atual em UTC (Padrão Universal)
+				    Fonte = DateTimeZone.UtcNow(),
+				
+				    // 2. Converte para o fuso horário de Brasília (UTC -3)
+				    DataHoraBrasilia = DateTimeZone.SwitchZone(Fonte, -3),
+				
+				    // 3. Remove a informação de fuso para ficar apenas como DateTime (mais limpo visualmente)
+				    DataLimpa = DateTimeZone.RemoveZone(DataHoraBrasilia),
+				
+				    // 4. Converte em tabela para carregar no modelo
+				    Tabela = #table(type table [DataAtualizacao = datetime], {{DataLimpa}})
+				in
+				    Tabela
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

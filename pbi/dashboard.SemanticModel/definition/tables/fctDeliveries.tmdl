@@ -1,0 +1,114 @@
+table fctDeliveries
+	lineageTag: 99dd455c-e6e3-44a6-85d7-e0e29e00e836
+
+	column order_id
+		dataType: string
+		lineageTag: 4dad8415-011d-4c44-b2cb-cd640cb8a4a3
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_sk
+		dataType: string
+		lineageTag: 373dbf1b-8a43-40f2-a166-b4fa928c0a36
+		summarizeBy: none
+		sourceColumn: customer_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column geolocation_sk
+		dataType: string
+		lineageTag: 6f8edbc7-54d0-47db-a63b-627e145d4fbb
+		summarizeBy: none
+		sourceColumn: geolocation_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		lineageTag: a8ed898f-ca04-4c58-8541-33b37b806ed6
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column purchase_dt
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4224fc54-a249-4597-951d-88ccc562fbe4
+		summarizeBy: none
+		sourceColumn: purchase_dt
+
+		annotation SummarizationSetBy = Automatic
+
+	column estimated_delivery_dt
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ff6666eb-6128-48d2-bcad-8808d900dc3d
+		summarizeBy: none
+		sourceColumn: estimated_delivery_dt
+
+		annotation SummarizationSetBy = Automatic
+
+	column delivered_customer_dt
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d684d804-dd02-44c2-a48d-4d122c6e51da
+		summarizeBy: none
+		sourceColumn: delivered_customer_dt
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_delivered
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f6dd6c9-15cb-4fe4-a107-b809bafd501f
+		summarizeBy: sum
+		sourceColumn: is_delivered
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_delayed
+		dataType: int64
+		formatString: 0
+		lineageTag: 16e89103-4f34-40f8-b0fc-e504d6e55ebf
+		summarizeBy: sum
+		sourceColumn: is_delayed
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_lead_time_days
+		dataType: double
+		lineageTag: 470c20aa-6572-4b49-be26-4dfd972a3c67
+		summarizeBy: sum
+		sourceColumn: order_lead_time_days
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column days_late
+		dataType: double
+		lineageTag: 55345434-ed33-4097-a253-180d07557eba
+		summarizeBy: sum
+		sourceColumn: days_late
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fctDeliveries = m
+		mode: import
+		source =
+				let
+				  Source = Value.NativeQuery(PostgreSQL.Database("localhost:5433", "warehouse"), "select * from analytics.fct_deliveries", null, [EnableFolding=true])
+				in
+				  Source
+
+	changedProperty = Name
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

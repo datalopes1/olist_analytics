@@ -1,0 +1,32 @@
+relationship e1f5a98a-83bc-08ca-f388-92970227961b
+	fromColumn: fctSales.customer_sk
+	toColumn: dimCustomers.customer_sk
+
+relationship 253946af-2f2d-0134-d67a-6a7b45cfb891
+	fromColumn: fctDeliveries.customer_sk
+	toColumn: dimCustomers.customer_sk
+
+relationship 297701bb-48d0-1919-2a09-f14bcbb0c1b7
+	fromColumn: fctSales.geolocation_sk
+	toColumn: dimGeolocations.geolocation_sk
+
+relationship ca7435ca-f4d7-b712-b9b5-f58d306543c1
+	fromColumn: fctDeliveries.geolocation_sk
+	toColumn: dimGeolocations.geolocation_sk
+
+relationship 8568b4dd-869f-218e-99c0-446b77c868c9
+	fromColumn: fctSales.product_sk
+	toColumn: dimProducts.product_sk
+
+relationship 615c370e-368e-8d13-a9c3-76a893c17338
+	fromColumn: fctSales.seller_sk
+	toColumn: dimSellers.seller_sk
+
+relationship f3a4c718-70a6-138e-5bbd-4e5e28f8356b
+	fromColumn: fctSales.purchase_dt
+	toColumn: dimCalendar.Date
+
+relationship 27755146-5066-fd7f-f8a5-82cdbd608b4d
+	fromColumn: fctDeliveries.purchase_dt
+	toColumn: dimCalendar.Date
+

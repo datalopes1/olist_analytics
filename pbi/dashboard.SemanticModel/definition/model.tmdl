@@ -1,0 +1,28 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	maxParallelismPerRefresh: 1
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["auxRefresh","dimCustomers","dimGeolocations","dimProducts","dimSellers","fctSales","fctDeliveries"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table auxRefresh
+ref table dimCalendar
+ref table ' Medidas'
+ref table dimCustomers
+ref table dimGeolocations
+ref table dimProducts
+ref table dimSellers
+ref table fctSales
+ref table fctDeliveries
+
+ref cultureInfo pt-BR
+

@@ -1,0 +1,56 @@
+table dimSellers
+	lineageTag: cb303337-4e33-490b-af9f-ac1db2f8dfb4
+
+	column seller_sk
+		dataType: string
+		lineageTag: 325668cb-70d6-4292-a158-383da1a0e7a7
+		summarizeBy: none
+		sourceColumn: seller_sk
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_id
+		dataType: string
+		lineageTag: ec1104f4-cc28-4911-94d2-6c1f1dcc3cc5
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_zip_code_prefix
+		dataType: int64
+		formatString: 0
+		lineageTag: e82de0f3-9d18-431c-89a9-c42a607ccff0
+		summarizeBy: none
+		sourceColumn: seller_zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf
+		dataType: string
+		lineageTag: 9bd798b5-cdf2-489b-8813-85a361ab9713
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column cidade
+		dataType: string
+		lineageTag: 85da45ac-f171-4b8d-9df5-b521a53354c8
+		summarizeBy: none
+		sourceColumn: cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimSellers = m
+		mode: import
+		source =
+				let
+				  Source = Value.NativeQuery(PostgreSQL.Database("localhost:5433", "warehouse"), "select * from analytics.dim_sellers", null, [EnableFolding=true])
+				in
+				  Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

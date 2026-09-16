@@ -1,0 +1,105 @@
+table dimCalendar
+	lineageTag: bff7d8b5-a524-41f3-ac78-874773f61d33
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: Short Date
+		lineageTag: be58a95c-1ce5-4a8c-b7bf-ffc04b768437
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		formatString: 0
+		lineageTag: e143a8ba-6ce0-45b5-82ca-a7864b279954
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNumero
+		isHidden
+		formatString: 0
+		lineageTag: 0c041711-a84d-4fe6-8d17-876009e1352d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MesNumero]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia
+		formatString: 0
+		lineageTag: 576c744b-e1ab-4daa-a2f0-3bd7e58869a2
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Dia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		lineageTag: 6b0475d6-4d8f-4ba3-9513-a5a20d7afd57
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes]
+		sortByColumn: MesNumero
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesAno
+		lineageTag: 4a0081e0-87c3-4518-ae65-9a987c3fe4f6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MesAno]
+		sortByColumn: MesAnoOrdem
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesAnoOrdem
+		isHidden
+		formatString: 0
+		lineageTag: 21d7ce27-a1c8-4c82-9c49-504979894db8
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [MesAnoOrdem]
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Calendario
+		lineageTag: 3e5f44d2-fd9d-40b9-9801-dac47c59ade5
+
+		level Ano
+			lineageTag: 31dd567f-c25d-4e65-b47b-2c2a0a3b8231
+			column: Ano
+
+		level Mês
+			lineageTag: 5f80d814-bd2b-4549-a4d6-768519d829ca
+			column: MesAno
+
+		level Dia
+			lineageTag: a8b60e0a-fabc-439a-ba51-d10d7628d269
+			column: Date
+
+	partition dimCalendar = calculated
+		mode: import
+		source =
+				
+				VAR _MinDate = DATE( 2016, 1, 1)
+				VAR _MaxDate = DATE (2018, 12, 31)
+				RETURN
+				ADDCOLUMNS(
+				    CALENDAR(_MinDate, _MaxDate),
+				    "Ano", YEAR([Date]),
+				    "MesNumero", MONTH([Date]),
+				    "Dia", DAY([Date]),
+				    "Mes", FORMAT([Date], "mmmm"),
+				    "MesAno", FORMAT ( [Date], "MMM YYYY" ),
+				    "MesAnoOrdem", YEAR ( [Date] ) * 100 + MONTH ( [Date] )
+				
+				)
+
+	annotation PBI_Id = e07a029e18b443d3bd882736cfdbb1d6
+
