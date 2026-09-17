@@ -3,7 +3,8 @@
   "displayName": "Off",
   "name": "1a10d48004893b2e53b8",
   "options": {
-    "targetVisualNames": []
+    "targetVisualNames": [],
+    "suppressData": true
   },
   "explorationState": {
     "version": "1.3",

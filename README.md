@@ -12,7 +12,7 @@
 
 Plataforma de data warehouse para análise de dados de e-commerce. Implementa pipeline moderno de ETL com dbt e dlt, transformando dados brutos do dataset público Olist em insights acionáveis através de PostgreSQL.
 
-![img](img\diagram.png)
+![img](img/diagram.png)
 
 ## ⚙️ Tecnologias Utilizadas
 
@@ -31,6 +31,7 @@ Plataforma de data warehouse para análise de dados de e-commerce. Implementa pi
 - uv (gerenciador de pacotes)
 
 ### Dashboard
+[Acesse o dashboard](https://app.powerbi.com/view?r=eyJrIjoiNmFmYjU1N2YtODk5OC00MWY2LWEzOGQtYWRmN2VkNzhlODQwIiwidCI6IjA1ZjBkZDRhLTE2N2ItNGUxOC1iZTBmLTExNTAxYTg4YmFhYyJ9). 
 ![dash](img/dashboard.png)
 
 ### Instalação
